@@ -1,6 +1,6 @@
 # our_water
 
-A new Our Water project.
+A new Flutter project.
 
 ## Getting Started
 
