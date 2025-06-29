@@ -43,6 +43,34 @@
 	</array>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<string>NSAllowsArbitraryLoads</string>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>ขออนุญาตใช้สิทธิ์</string>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>ขออนุญาตใช้สิทธิ์</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>ขออนุญาตใช้สิทธิ์</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>ขออนุญาตใช้สิทธิ์</string>
+	<key>NSCameraUsageDescription</key>
+	<string>กล้องของท่านจะถูกใช้เพื่อถ่ายภาพ</string>
+	<key>NSContactsUsageDescription</key>
+	<string>ขออนุญาตใช้สิทธิ์</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>ขออนุญาตใช้สิทธิ์</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>ตำแหน่งของท่านจะถูกใช้ในการค้นหาสินค้าใกล้คุณ</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>ตำแหน่งของท่านจะถูกใช้ในการค้นหาสินค้าใกล้คุณ</string>
+	<key>NSMotionUsageDescription</key>
+	<string>ขออนุญาตใช้สิทธิ์</string>
+	<key>NSSiriUsageDescription</key>
+	<string>ขออนุญาตใช้สิทธิ์</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>ขออนุญาตใช้สิทธิ์</string>
+	<key>NSUserNotificationUsageDescription</key>
+	<string>การแจ้งเตือนอาจรวมถึงการเตือน เสียง และป้ายกำกับไอคอน คุณสามารถตั้งค่า การแจ้งเตือนเหล่านี้ได้ที่การตั้งค่า</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 </dict>
