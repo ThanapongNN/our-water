@@ -141,7 +141,7 @@ class _OurWaterState extends State<OurWater> {
                           _getColorFromPosition(details.localPosition, constraints);
                         },
                         child: Container(
-                          color: _selectedColor,
+                          color: Colors.grey.shade300,
                           child: Stack(
                             children: [
                               Center(child: RawImage(image: _image)),
