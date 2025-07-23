@@ -179,32 +179,37 @@ class _OurWaterState extends State<OurWater> {
             children: [
               if (_image != null)
                 Expanded(
-                  child: LayoutBuilder(
-                    builder: (context, constraints) {
-                      _imageConstraints = constraints;
-                      return GestureDetector(
-                        onTapDown: (details) {
-                          _getColorFromPosition(details.localPosition, constraints);
-                        },
-                        child: Container(
-                          color: Colors.grey.shade300,
-                          child: Stack(
-                            children: [
-                              Center(child: RawImage(image: _image)),
-                              if (_tapPosition != null)
-                                Positioned.fill(
-                                  child: CustomPaint(
-                                    painter: CirclePainter(
-                                      position: _tapPosition,
-                                      radius: _radius.toDouble(),
+                  child: InteractiveViewer(
+                    panEnabled: true,
+                    minScale: 0.5,
+                    maxScale: 4.0,
+                    child: LayoutBuilder(
+                      builder: (context, constraints) {
+                        _imageConstraints = constraints;
+                        return GestureDetector(
+                          onTapDown: (details) {
+                            _getColorFromPosition(details.localPosition, constraints);
+                          },
+                          child: Container(
+                            color: Colors.grey.shade300,
+                            child: Stack(
+                              children: [
+                                Center(child: RawImage(image: _image)),
+                                if (_tapPosition != null)
+                                  Positioned.fill(
+                                    child: CustomPaint(
+                                      painter: CirclePainter(
+                                        position: _tapPosition,
+                                        radius: _radius.toDouble(),
+                                      ),
                                     ),
                                   ),
-                                ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                      );
-                    },
+                        );
+                      },
+                    ),
                   ),
                 ),
               if (_image != null)
