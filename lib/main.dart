@@ -119,6 +119,52 @@ class _OurWaterState extends State<OurWater> {
     }
   }
 
+  String getTotalHardness(int g) {
+    if (g > 90) {
+      return 'Not Detected';
+    } else if (g < 59) {
+      return 'Out of Range';
+    }
+
+    return (((102 - _selectedColor!.green) - 6.3544) / 0.7144).toStringAsFixed(2);
+  }
+
+  String getChloride(int g) {
+    if (g < 148) {
+      return 'Not Detected';
+    } else if (g > 185) {
+      return 'Out of Range';
+    }
+    return (((_selectedColor!.green - 140) - 7.8466) / 0.3557).toStringAsFixed(2);
+  }
+
+  String getNitrate(int g) {
+    if (g > 143) {
+      return 'Not Detected';
+    } else if (g < 39) {
+      return 'Out of Range';
+    }
+    return (((195 - _selectedColor!.green) - 51.926) / 5.7136).toStringAsFixed(2);
+  }
+
+  String getNitrite(int g) {
+    if (g > 165) {
+      return 'Not Detected';
+    } else if (g < 119) {
+      return 'Out of Range';
+    }
+    return (((195 - _selectedColor!.green) - 30.081) / 44.094).toStringAsFixed(2);
+  }
+
+  String getFluoride(int g) {
+    if (g > 60) {
+      return 'Not Detected';
+    } else if (g < 5) {
+      return 'Out of Range';
+    }
+    return (((120 - _selectedColor!.green) - 57.856) / 383.67).toStringAsFixed(3);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -205,21 +251,21 @@ class _OurWaterState extends State<OurWater> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          Text('Hardness detection: '),
-                          Text('Chloride detection: '),
-                          Text('Nitrate detection: '),
-                          Text('Nitrite detection: '),
-                          Text('Fluoride detection: '),
+                          Text('Total Hardness : '),
+                          Text('Chloride : '),
+                          Text('Nitrate : '),
+                          Text('Nitrite : '),
+                          Text('Fluoride : '),
                         ],
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('${(_selectedColor!.green - 6.3544) / 0.7144}'),
-                          Text('${(_selectedColor!.green - 7.8466) / 0.3557}'),
-                          Text('${(_selectedColor!.green - 51.926) / 5.7136}'),
-                          Text('${(_selectedColor!.green - 30.081) / 44.094}'),
-                          Text('${(_selectedColor!.green - 57.856) / 383.67}'),
+                          Text(getTotalHardness(_selectedColor!.green)),
+                          Text(getChloride(_selectedColor!.green)),
+                          Text(getNitrate(_selectedColor!.green)),
+                          Text(getNitrite(_selectedColor!.green)),
+                          Text(getFluoride(_selectedColor!.green)),
                         ],
                       ),
                     ],
