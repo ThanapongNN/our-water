@@ -30,6 +30,12 @@ class _OurWaterState extends State<OurWater> {
   int _radius = 20;
   BoxConstraints? _imageConstraints;
 
+  String a = '';
+  String b = '';
+  String c = '';
+  String d = '';
+  String e = '';
+
   Future<void> _pickImage() async {
     final picker = ImagePicker();
     final XFile? pickedFile = await picker.pickImage(source: ImageSource.gallery);
@@ -42,7 +48,13 @@ class _OurWaterState extends State<OurWater> {
         ui.decodeImageFromList(_imageBytes!, (result) => completer.complete(result));
         _decodedImage = decoded;
         _image = await completer.future;
-        setState(() {});
+        setState(() {
+          a = '';
+          b = '';
+          c = '';
+          d = '';
+          e = '';
+        });
       }
     }
   }
@@ -59,7 +71,13 @@ class _OurWaterState extends State<OurWater> {
         ui.decodeImageFromList(_imageBytes!, (result) => completer.complete(result));
         _decodedImage = decoded;
         _image = await completer.future;
-        setState(() {});
+        setState(() {
+          a = '';
+          b = '';
+          c = '';
+          d = '';
+          e = '';
+        });
       }
     }
   }
@@ -119,50 +137,84 @@ class _OurWaterState extends State<OurWater> {
     }
   }
 
-  String getTotalHardness(int g) {
+  void getTotalHardness(int g) {
     if (g > 90) {
-      return 'Not Detected';
+      setState(() {
+        a = 'Not Detected';
+      });
     } else if (g < 59) {
-      return 'Out of Range';
+      setState(() {
+        a = 'Out of Range';
+      });
+    } else {
+      setState(() {
+        a = '${(((102 - _selectedColor!.green) - 6.3544) / 0.7144).toStringAsFixed(2)} mg/L';
+      });
     }
-
-    return (((102 - _selectedColor!.green) - 6.3544) / 0.7144).toStringAsFixed(2);
   }
 
-  String getChloride(int g) {
+  void getChloride(int g) {
     if (g < 148) {
-      return 'Not Detected';
+      setState(() {
+        b = 'Not Detected';
+      });
     } else if (g > 185) {
-      return 'Out of Range';
+      setState(() {
+        b = 'Out of Range';
+      });
+    } else {
+      setState(() {
+        b = '${(((_selectedColor!.green - 140) - 7.8466) / 0.3557).toStringAsFixed(2)} mg/L';
+      });
     }
-    return (((_selectedColor!.green - 140) - 7.8466) / 0.3557).toStringAsFixed(2);
   }
 
-  String getNitrate(int g) {
+  void getNitrate(int g) {
     if (g > 143) {
-      return 'Not Detected';
+      setState(() {
+        c = 'Not Detected';
+      });
     } else if (g < 39) {
-      return 'Out of Range';
+      setState(() {
+        c = 'Out of Range';
+      });
+    } else {
+      setState(() {
+        c = '${(((195 - _selectedColor!.green) - 51.926) / 5.7136).toStringAsFixed(2)} mg/L';
+      });
     }
-    return (((195 - _selectedColor!.green) - 51.926) / 5.7136).toStringAsFixed(2);
   }
 
-  String getNitrite(int g) {
+  void getNitrite(int g) {
     if (g > 165) {
-      return 'Not Detected';
+      setState(() {
+        d = 'Not Detected';
+      });
     } else if (g < 119) {
-      return 'Out of Range';
+      setState(() {
+        d = 'Out of Range';
+      });
+    } else {
+      setState(() {
+        d = '${(((195 - _selectedColor!.green) - 30.081) / 44.094).toStringAsFixed(2)} mg/L';
+      });
     }
-    return (((195 - _selectedColor!.green) - 30.081) / 44.094).toStringAsFixed(2);
   }
 
-  String getFluoride(int g) {
+  void getFluoride(int g) {
     if (g > 60) {
-      return 'Not Detected';
+      setState(() {
+        e = 'Not Detected';
+      });
     } else if (g < 5) {
-      return 'Out of Range';
+      setState(() {
+        e = 'Out of Range';
+      });
+    } else {
+      setState(() {
+        e = '${(((120 - _selectedColor!.green) - 57.856) / 383.67).toStringAsFixed(3)} mg/L';
+      });
     }
-    return (((120 - _selectedColor!.green) - 57.856) / 383.67).toStringAsFixed(3);
   }
 
   @override
@@ -247,99 +299,233 @@ class _OurWaterState extends State<OurWater> {
                     style: TextStyle(color: Colors.white, fontSize: 18),
                   ),
                 ),
+              SizedBox(height: 10),
               if (_selectedColor != null)
-                Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Column(
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           Text('Total Hardness : '),
-                          Text('Chloride : '),
-                          Text('Nitrate : '),
-                          Text('Nitrite : '),
-                          Text('Fluoride : '),
                         ],
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(getTotalHardness(_selectedColor!.green)),
-                          Text(getChloride(_selectedColor!.green)),
-                          Text(getNitrate(_selectedColor!.green)),
-                          Text(getNitrite(_selectedColor!.green)),
-                          Text(getFluoride(_selectedColor!.green)),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              SizedBox(
-                height: 50,
-                child: Row(children: [
-                  Expanded(
-                    child: ElevatedButton(
-                      onPressed: _pickImage,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        foregroundColor: Color(0xFFDCDCDC),
-                        padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5), side: BorderSide(color: Colors.blue)),
-                      ),
-                      child: FittedBox(
-                        child: Row(children: [
-                          Icon(
-                            Icons.photo_library_outlined,
-                            size: 20,
-                            color: Colors.blue,
-                          ),
-                          SizedBox(width: 10),
-                          Text(
-                            'เลือกจากอัลบั้ม',
-                            style: TextStyle(
-                              color: Colors.blue,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ]),
                       ),
                     ),
-                  ),
-                  SizedBox(width: 20),
-                  Expanded(
-                    child: ElevatedButton(
-                      onPressed: _pickCamera,
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(a),
+                        ],
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: () => getTotalHardness(_selectedColor!.green),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.blue,
                         foregroundColor: Colors.white,
-                        padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
                       ),
-                      child: FittedBox(
-                        child: Row(children: [
-                          Icon(
-                            Icons.camera_alt_outlined,
-                            size: 20,
-                            color: Colors.white,
-                          ),
-                          SizedBox(width: 10),
-                          Text(
-                            'ถ่ายรูป',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ]),
+                      child: Text(
+                        'Get',
+                        style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
                       ),
                     ),
+                  ],
+                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text('Chloride : '),
+                      ],
+                    ),
                   ),
-                ]),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(b),
+                      ],
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () => getChloride(_selectedColor!.green),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blue,
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                    ),
+                    child: Text(
+                      'Get',
+                      style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ],
               ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text('Nitrate : '),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(c),
+                      ],
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () => getNitrate(_selectedColor!.green),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blue,
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                    ),
+                    child: Text(
+                      'Get',
+                      style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text('Nitrite : '),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(d),
+                      ],
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () => getNitrite(_selectedColor!.green),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blue,
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                    ),
+                    child: Text(
+                      'Get',
+                      style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text('Fluoride : '),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(e),
+                      ],
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () => getFluoride(_selectedColor!.green),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blue,
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                    ),
+                    child: Text(
+                      'Get',
+                      style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ],
+              ),
+              Divider(),
+              Row(children: [
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: _pickImage,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      foregroundColor: Color(0xFFDCDCDC),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5), side: BorderSide(color: Colors.blue)),
+                    ),
+                    child: FittedBox(
+                      child: Row(children: [
+                        Icon(
+                          Icons.photo_library_outlined,
+                          size: 20,
+                          color: Colors.blue,
+                        ),
+                        SizedBox(width: 10),
+                        Text(
+                          'Gallery',
+                          style: TextStyle(
+                            color: Colors.blue,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ]),
+                    ),
+                  ),
+                ),
+                SizedBox(width: 20),
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: _pickCamera,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blue,
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                    ),
+                    child: FittedBox(
+                      child: Row(children: [
+                        Icon(
+                          Icons.camera_alt_outlined,
+                          size: 20,
+                          color: Colors.white,
+                        ),
+                        SizedBox(width: 10),
+                        Text(
+                          'Camera',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ]),
+                    ),
+                  ),
+                ),
+              ]),
             ],
           ),
         ),
