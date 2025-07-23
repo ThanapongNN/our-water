@@ -276,67 +276,70 @@ class _OurWaterState extends State<OurWater> {
                     ],
                   ),
                 ),
-              Row(children: [
-                Expanded(
-                  child: ElevatedButton(
-                    onPressed: _pickImage,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white,
-                      foregroundColor: Color(0xFFDCDCDC),
-                      padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5), side: BorderSide(color: Colors.blue)),
-                    ),
-                    child: FittedBox(
-                      child: Row(children: [
-                        Icon(
-                          Icons.photo_library_outlined,
-                          size: 20,
-                          color: Colors.blue,
-                        ),
-                        SizedBox(width: 10),
-                        Text(
-                          'เลือกจากอัลบั้ม',
-                          style: TextStyle(
+              SizedBox(
+                height: 50,
+                child: Row(children: [
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: _pickImage,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        foregroundColor: Color(0xFFDCDCDC),
+                        padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5), side: BorderSide(color: Colors.blue)),
+                      ),
+                      child: FittedBox(
+                        child: Row(children: [
+                          Icon(
+                            Icons.photo_library_outlined,
+                            size: 20,
                             color: Colors.blue,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
                           ),
-                        ),
-                      ]),
+                          SizedBox(width: 10),
+                          Text(
+                            'เลือกจากอัลบั้ม',
+                            style: TextStyle(
+                              color: Colors.blue,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ]),
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(width: 20),
-                Expanded(
-                  child: ElevatedButton(
-                    onPressed: _pickCamera,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue,
-                      foregroundColor: Colors.white,
-                      padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-                    ),
-                    child: FittedBox(
-                      child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                        Icon(
-                          Icons.camera_alt_outlined,
-                          size: 20,
-                          color: Colors.white,
-                        ),
-                        SizedBox(width: 10),
-                        Text(
-                          'ถ่ายรูป',
-                          style: TextStyle(
+                  SizedBox(width: 20),
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: _pickCamera,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.blue,
+                        foregroundColor: Colors.white,
+                        padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                      ),
+                      child: FittedBox(
+                        child: Row(children: [
+                          Icon(
+                            Icons.camera_alt_outlined,
+                            size: 20,
                             color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
                           ),
-                        ),
-                      ]),
+                          SizedBox(width: 10),
+                          Text(
+                            'ถ่ายรูป',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ]),
+                      ),
                     ),
                   ),
-                ),
-              ]),
+                ]),
+              ),
             ],
           ),
         ),
