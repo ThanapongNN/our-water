@@ -212,7 +212,7 @@ void getFluoride(int g) {
       });
     } else {
       setState(() {
-        e = '${(((120 - _selectedColor!.green) - 36.261) / 543.59).toStringAsFixed(3)} mg/L';
+        e = '${(((165 - _selectedColor!.green) - 36.261) / 543.59).toStringAsFixed(3)} mg/L';
       });
     }
   }
