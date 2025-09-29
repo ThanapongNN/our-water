@@ -180,7 +180,7 @@ class _OurWaterState extends State<OurWater> {
       });
     } else {
       setState(() {
-        c = '${(((195 - _selectedColor!.green) - 51.926) / 5.7136).toStringAsFixed(2)} mg/L';
+        c = '${(((195 - _selectedColor!.green) - 53.506) / 5.1765).toStringAsFixed(2)} mg/L';
       });
     }
   }
@@ -202,11 +202,11 @@ class _OurWaterState extends State<OurWater> {
   }
 
 void getFluoride(int g) {
-    if (g > 60) {
+    if (g > 132) {
       setState(() {
         e = 'Not Detected';
       });
-    } else if (g < 5) {
+    } else if (g < 44) {
       setState(() {
         e = 'Out of Range';
       });
